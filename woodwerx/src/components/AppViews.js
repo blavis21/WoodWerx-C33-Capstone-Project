@@ -4,21 +4,24 @@ import Login from './Authentication/Login'
 import Register from './Authentication/Register'
 import API from '../modules/APIManager'
 import Project from './project/Project'
-import Home from './Home'
 
 export default class AppViews extends Component {
     state = {
         users: [],
         projects: [],
-        favorites: []
+        favorites: [],
+        tools: []
     }
 
 
     componentDidMount() {
         const newState = {}
 
-        API.getAll("user")
+        API.getAll("users")
             .then(user => (newState.users = user))
+        API.getAll("projects")
+            .then(project => (newState.projects = project))
+            .then(() => this.setState(newState))
     }
 
     isAuthenticated = () => sessionStorage.getItem("user") !== null
@@ -38,21 +41,18 @@ export default class AppViews extends Component {
                 }}
                 />
 
-                <Route path="/project" render={props => {
-                    return <Project />
-                }}
-                />
-
                 <Route path="/home" render={props => {
-                    if (this.isAuthenticated()) {
-                        return (
-                            <Home />
-                        )
+                    if(this.isAuthenticated()) {
+                        console.log(this.state.projects)
+                        return <Project {...props} 
+                        projects={this.state.projects}
+                         />
                     } else {
-                        return <Redirect to="/login" />
+                        return <Redirect to="/" />
                     }
                 }}
                 />
+
             </React.Fragment>
         )
     }

@@ -22,12 +22,7 @@ class Login extends Component {
     handleLogin = e => {
         e.preventDefault()
 
-        if (this.state.username === "" || this.state.password === "") {
-            window.alert("Please fill out the missing section")
-        } 
-        
-
-        APIManager.getAll("user")
+        APIManager.getAll("users")
             .then(user => {
                 const singleUser = user.find(el =>
                     el.email.toLowerCase() === this.state.email.toLowerCase() && el.password.toLowerCase() === this.state.password.toLowerCase()
@@ -39,6 +34,8 @@ class Login extends Component {
                 this.props.history.push('/home')
             })
     }
+
+
     render() {
         return (
             <Form className="login-form">
