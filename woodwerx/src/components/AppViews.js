@@ -35,6 +35,7 @@ export default class AppViews extends Component {
                     return <Login />
                 }}
                 />
+                
 
                 <Route path="/register" render={props => {
                     return <Register />

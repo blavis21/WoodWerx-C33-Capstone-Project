@@ -14,9 +14,9 @@ class Register extends Component {
     }
 
     addUser = user => {
-        return APIManager.post("user", user)
+        return APIManager.post("users", user)
             .then((user) => sessionStorage.setItem("user", user.id))
-            .then(() => APIManager.getAll("user"))
+            .then(() => APIManager.getAll("users"))
             .then(users =>
                 this.setState({
                     users: users
