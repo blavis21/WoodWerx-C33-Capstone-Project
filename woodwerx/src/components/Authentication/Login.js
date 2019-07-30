@@ -21,14 +21,21 @@ class Login extends Component {
 
     handleLogin = e => {
         e.preventDefault()
+
+        if (this.state.username === "" || this.state.password === "") {
+            window.alert("Please fill out the missing section")
+        } 
+        
+
         APIManager.getAll("user")
             .then(user => {
-                const singleUser = user.find(el => 
+                const singleUser = user.find(el =>
                     el.email.toLowerCase() === this.state.email.toLowerCase() && el.password.toLowerCase() === this.state.password.toLowerCase()
                 )
                 if (singleUser) {
                     sessionStorage.setItem("user", singleUser.id)
                 }
+                this.props.setAuthState()
                 this.props.history.push('/home')
             })
     }
@@ -42,7 +49,7 @@ class Login extends Component {
                 </FormGroup>
                 <FormGroup>
                     <Label>Password</Label><br />
-                    <input onChange={this.handFieldChange}type="password" id="password" placeholder="Password" />
+                    <input onChange={this.handFieldChange} type="password" id="password" placeholder="Password" />
                 </FormGroup>
                 <Button onClick={this.handleLogin} type="submit" className="btn-md btn-dark btn-block">Login</Button>
                 <Link to="/register">
