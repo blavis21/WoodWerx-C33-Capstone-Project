@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import Login from './Authentication/Login'
-import Register from './Authentication/Register'
+import SignInForm from './Authentication/Login'
+import SignUpForm from './Authentication/Register'
 import API from '../modules/APIManager'
 import Project from './project/Project'
 
@@ -32,13 +32,13 @@ export default class AppViews extends Component {
             <React.Fragment>
 
                 <Route exact path="/" render={props => {
-                    return <Login />
+                    return <SignInForm />
                 }}
                 />
                 
 
                 <Route path="/register" render={props => {
-                    return <Register />
+                    return <SignUpForm />
                 }}
                 />
 

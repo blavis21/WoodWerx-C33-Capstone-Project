@@ -30,7 +30,7 @@ class Login extends Component {
                 if (singleUser) {
                     sessionStorage.setItem("user", singleUser.id)
                 }
-                this.props.setAuthState()
+                // this.props.setAuthState()
                 this.props.history.push('/home')
             })
     }
@@ -58,3 +58,4 @@ class Login extends Component {
 }
 
 export default withRouter(Login)
+
