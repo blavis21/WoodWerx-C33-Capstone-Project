@@ -5,6 +5,7 @@ import Register from './Authentication/Register'
 import API from '../modules/APIManager'
 import Project from './project/Project'
 import Tool from './tool/Tool'
+import ProjectForm from './project/ProjectForm'
 
 export default class AppViews extends Component {
     state = {
@@ -63,6 +64,16 @@ export default class AppViews extends Component {
                         return <Tool {...props}
                             tools={this.state.tools}
                         />
+                    } else {
+                        return <Redirect to="/" />
+                    }
+                }}
+                />
+
+                <Route path="/projectform" render={props => {
+                    if (this.isAuthenticated()) {
+                        // console.log(this.state.tools)
+                        return <ProjectForm />
                     } else {
                         return <Redirect to="/" />
                     }

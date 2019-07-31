@@ -3,3 +3,15 @@
     flex-direction: row;
     justify-content: space-evenly
 }
+
+.createBtn {
+    color: white;
+    background-color: rgb(65, 65, 83);
+    margin: 25px;
+}
+
+.project-form {
+    display: flex;
+    justify-content: center
+}
+
