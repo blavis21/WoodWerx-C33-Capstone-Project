@@ -32,7 +32,8 @@
 // }
 
 import React, {Component} from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, Nav, NavItem, NavLink } from 'reactstrap'
+import './nav.css'
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -58,8 +59,8 @@ export default class NavBar extends Component {
     return (
       <div>
         <Navbar color="dark" dark>
-          <NavbarBrand href="/" className="mr-auto"/>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+          {/* <NavbarBrand href="/" className="fa fa-home" href="/home"/> */}
+          <NavbarToggler onClick={this.toggleNavbar} className="ml-0" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar>
               <NavItem>
