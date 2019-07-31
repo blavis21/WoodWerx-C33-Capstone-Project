@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import SignInForm from './Authentication/Login'
-import SignUpForm from './Authentication/Register'
+import Login from './Authentication/Login'
+import Register from './Authentication/Register'
 import API from '../modules/APIManager'
 import Project from './project/Project'
+import Tool from './tool/Tool'
 
 export default class AppViews extends Component {
     state = {
@@ -21,6 +22,8 @@ export default class AppViews extends Component {
             .then(user => (newState.users = user))
         API.getAll("projects")
             .then(project => (newState.projects = project))
+        API.getAll("tools")
+            .then(tool => newState.tools = tool)
             .then(() => this.setState(newState))
     }
 
@@ -32,22 +35,34 @@ export default class AppViews extends Component {
             <React.Fragment>
 
                 <Route exact path="/" render={props => {
-                    return <SignInForm />
+                    return <Login />
                 }}
                 />
-                
+
 
                 <Route path="/register" render={props => {
-                    return <SignUpForm />
+                    return <Register />
                 }}
                 />
 
                 <Route path="/home" render={props => {
-                    if(this.isAuthenticated()) {
+                    if (this.isAuthenticated()) {
                         console.log(this.state.projects)
-                        return <Project {...props} 
-                        projects={this.state.projects}
-                         />
+                        return <Project {...props}
+                            projects={this.state.projects}
+                        />
+                    } else {
+                        return <Redirect to="/" />
+                    }
+                }}
+                />
+
+                <Route path="/tools" render={props => {
+                    if (this.isAuthenticated()) {
+                        console.log(this.state.tools)
+                        return <Tool {...props}
+                            tools={this.state.tools}
+                        />
                     } else {
                         return <Redirect to="/" />
                     }

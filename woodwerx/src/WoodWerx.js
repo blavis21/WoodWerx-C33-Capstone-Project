@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import Example from './components/navbar/Nav'
-import Login from './components/Authentication/Login'
+import NavBar from './components/navbar/Nav'
+// import Login from './components/Authentication/Login'
 import AppViews from './components/AppViews';
-import './App.css'
 
 export default class App extends Component {
 
@@ -21,7 +20,7 @@ export default class App extends Component {
     // if (this.state.authenticated) {
       return (
         <React.Fragment>
-          <Example />
+          <NavBar />
           <AppViews />
         </React.Fragment>
       )
