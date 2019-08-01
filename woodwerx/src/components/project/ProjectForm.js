@@ -1,30 +1,52 @@
 import React, { Component } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
-// import APIManager from '../../modules/APIManager'
+import APIManager from '../../modules/APIManager'
 
 export default class ProjectForm extends Component {
 
     state = {
+        userId: +sessionStorage.getItem("user"),
         name: "",
         description: "",
         material: "",
         cutList: "",
-        steps: "",
+        instructions: "",
         image: "",
         modal: false
+    }
+
+    handleFieldChange = evt => {
+        const stateToChange = {}
+        stateToChange[evt.target.id] = evt.target.value
+        console.log(stateToChange)
+        this.setState(stateToChange)
+    }
+
+    handleClick = event => {
+        event.preventDefault()
+        const project = {
+            userId: this.state.userId,
+            name: this.state.name,
+            description: this.state.description,
+            material: this.state.material,
+            cutList: this.state.cutList,
+            instructions: this.state.instructions,
+            image: this.state.image
+        }
+        console.log("form data", project)
+        this.props.addProject(project)
     }
 
     closeModal = () => this.setState({ modal: false })
     // openModal = () => console.log("this works")
     openModal = () => this.setState({ modal: true })
-    
+
+
     render() {
-
-
         return (
 
             <div className="entireModal">
-                <Button className= "createBtn" onClick={this.openModal}><i className="fa fa-plus"></i> Create New Project</Button>
+                <Button className="createBtn" onClick={this.openModal}><i className="fa fa-plus"></i> Create New Project</Button>
                 <Modal show={this.state.modal}>
                     <Modal.Header>
                         <Modal.Title>New Project</Modal.Title>
@@ -34,27 +56,32 @@ export default class ProjectForm extends Component {
 
                         <Form>
 
-                            <Form.Group controlId="">
+                            <Form.Group controlId="name">
                                 <Form.Label>Project Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter a name for your project" />
+                                <Form.Control onChange={this.handleFieldChange} type="text" placeholder="Enter a name for your project" />
                             </Form.Group>
 
-                            <Form.Group controlId="">
+                            <Form.Group controlId="image">
+                                <Form.Label>Image URL</Form.Label>
+                                <Form.Control type="text" onChange={this.handleFieldChange}/>
+                            </Form.Group>
+
+                            <Form.Group controlId="description">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control type="text" placeholder="Enter a brief description" />
+                                <Form.Control onChange={this.handleFieldChange} type="text" placeholder="Enter a brief description" />
                             </Form.Group>
 
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Group controlId="material">
                                 <Form.Label>Materials</Form.Label>
-                                <Form.Control as="textarea" rows="3" />
+                                <Form.Control onChange={this.handleFieldChange} as="textarea" rows="3" />
                             </Form.Group>
 
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Group controlId="cutList">
                                 <Form.Label>Cut List</Form.Label>
-                                <Form.Control as="textarea" rows="3" />
+                                <Form.Control onChange={this.handleFieldChange} as="textarea" rows="3" />
                             </Form.Group>
 
-                            <Form.Group controlId="exampleForm.ControlSelect2">
+                            <Form.Group controlId="tools">
                                 <Form.Label>Tools (select all that apply) </Form.Label>
                                 <Form.Control as="select" multiple>
                                     <option>Drill</option>
@@ -65,9 +92,9 @@ export default class ProjectForm extends Component {
                                 </Form.Control>
                             </Form.Group>
 
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Group controlId="instructions">
                                 <Form.Label>Instructions</Form.Label>
-                                <Form.Control as="textarea" rows="3" />
+                                <Form.Control onChange={this.handleFieldChange} as="textarea" rows="3" />
                             </Form.Group>
 
                         </Form>
@@ -75,7 +102,7 @@ export default class ProjectForm extends Component {
 
                     <Modal.Footer>
                         <Button onClick={this.closeModal} variant="secondary">Close</Button>
-                        <Button variant="primary">Save</Button>
+                        <Button onClick={this.handleClick} variant="primary">Save</Button>
                     </Modal.Footer>
 
                 </Modal>

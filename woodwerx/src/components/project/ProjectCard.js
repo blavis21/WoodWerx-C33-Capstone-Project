@@ -3,9 +3,15 @@ import { Card } from 'react-bootstrap'
 
 export default class ProjectCard extends Component {
 
+
+ 
+
+
     render() {
+
         return (
                 <Card onClick={() => alert("Testing")} 
+                    className="proj-card"
                     // key={this.props.projects.id}
                     style={{ width: "18rem" }}>
                     <Card.Img variant="top" src={this.props.project.image} />

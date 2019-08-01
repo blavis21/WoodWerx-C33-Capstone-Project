@@ -11,7 +11,7 @@ export default class Project extends Component {
         return (
             <div>
                 <div className="project-form">
-                    <ProjectForm />
+                    <ProjectForm {...this.props}/>
                 </div>
                 <div>
                     <section className="projects">
