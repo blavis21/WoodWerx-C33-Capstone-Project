@@ -30,6 +30,15 @@ export default class AppViews extends Component {
 
     isAuthenticated = () => sessionStorage.getItem("user") !== null
 
+    addProject = proj => {
+        API.post("projects", proj)
+            .then(() => API.getAll("projects"))
+            .then(project => this.setState({
+                projects: project
+            })
+            )
+    }
+
 
     render() {
         return (
@@ -51,6 +60,7 @@ export default class AppViews extends Component {
                         console.log(this.state.projects)
                         return <Project {...props}
                             projects={this.state.projects}
+                            addProject={this.addProject}
                         />
                     } else {
                         return <Redirect to="/" />
