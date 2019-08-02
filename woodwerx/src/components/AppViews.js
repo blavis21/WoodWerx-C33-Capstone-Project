@@ -6,6 +6,7 @@ import API from '../modules/APIManager'
 import Project from './project/Project'
 import Tool from './tool/Tool'
 import ProjectForm from './project/ProjectForm'
+import DetailedProject from './project/DetailedProject';
 
 export default class AppViews extends Component {
     state = {
@@ -84,6 +85,18 @@ export default class AppViews extends Component {
                     if (this.isAuthenticated()) {
                         // console.log(this.state.tools)
                         return <ProjectForm />
+                    } else {
+                        return <Redirect to="/" />
+                    }
+                }}
+                />
+
+                <Route exact path="/projects/:projectId(\d+)" render={props => {
+                    let proj = this.state.projects.find(project => project.id ===parseInt(props.match.params.projectId))
+
+                    if (this.isAuthenticated()) {
+                        // console.log(this.state.tools)
+                        return <DetailedProject proj={proj}/>
                     } else {
                         return <Redirect to="/" />
                     }
