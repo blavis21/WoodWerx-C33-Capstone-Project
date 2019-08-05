@@ -6,7 +6,8 @@ import API from '../modules/APIManager'
 import Project from './project/Project'
 import Tool from './tool/Tool'
 import ProjectForm from './project/ProjectForm'
-import DetailedProject from './project/DetailedProject';
+import DetailedProject from './project/DetailedProject'
+import MyProjects from './project/MyProjects'
 
 export default class AppViews extends Component {
     state = {
@@ -38,6 +39,13 @@ export default class AppViews extends Component {
                 projects: project
             })
             )
+    }
+
+    getUserProjects = (resource, query) => {
+        API.getAll(resource, query)
+            .then(proj => this.setState({
+                projects: proj
+            }))
     }
 
 
@@ -92,11 +100,26 @@ export default class AppViews extends Component {
                 />
 
                 <Route exact path="/projects/:projectId(\d+)" render={props => {
-                    let proj = this.state.projects.find(project => project.id ===parseInt(props.match.params.projectId))
+                    let proj = this.state.projects.find(project => project.id === parseInt(props.match.params.projectId))
 
                     if (this.isAuthenticated()) {
                         // console.log(this.state.tools)
-                        return <DetailedProject proj={proj}/>
+                        return <DetailedProject proj={proj} />
+                    } else {
+                        return <Redirect to="/" />
+                    }
+                }}
+                />
+
+                <Route exact path="/myprojects" render={props => {
+                    // let myProj = this.state.projects.filter( proj => proj.userId === +sessionStorage.getItem("user"))
+
+                    if (this.isAuthenticated()) {
+                        return <MyProjects 
+                        // myProj={myProj}
+                        getUserProjects={this.getUserProjects}
+                        projects={this.state.projects} 
+                        />
                     } else {
                         return <Redirect to="/" />
                     }

@@ -14,7 +14,7 @@ export default class DetailedProject extends Component {
                             </Col>
                             <h2 style={{padding: '5px'}}>{this.props.proj.name}</h2>
                         </div>
-                        <div classname="proj-details">
+                        <div className="proj-details">
                             <h4>Materials</h4>
                             <p>{this.props.proj.material}</p>
                             <h4>Cut List</h4>
