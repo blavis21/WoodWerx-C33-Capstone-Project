@@ -7,11 +7,11 @@ export default class ProjectCard extends Component {
 
         return (
             <Card
-            //  Lookup card shadow
+                //  Lookup card shadow
                 // col={3}
                 className="proj-card"
                 key={this.props.projects.id}
-                style={{ width: "18rem" }}>
+                style={{ width: "18rem", margin: "20px" }}>
                 <Card.Img variant="top" src={this.props.project.image} />
                 <Card.Body>
                     <Card.Title>{this.props.project.name}</Card.Title>

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Modal, Button, Form } from 'react-bootstrap'
+import { withRouter } from 'react-router'
+import API from '../../modules/APIManager'
 // import APIManager from '../../modules/APIManager'
 
-export default class ProjectForm extends Component {
+class EditProject extends Component {
 
     state = {
         userId: +sessionStorage.getItem("user"),
@@ -10,6 +12,7 @@ export default class ProjectForm extends Component {
         description: "",
         material: "",
         cutList: "",
+        tools: "",
         instructions: "",
         image: "",
         modal: false
@@ -22,19 +25,39 @@ export default class ProjectForm extends Component {
         this.setState(stateToChange)
     }
 
-    handleClick = event => {
+    editProj = event => {
         event.preventDefault()
         const project = {
-            userId: this.state.userId,
+            id: this.props.match.params.projectId,
+            userId: +sessionStorage.getItem("user"),
             name: this.state.name,
             description: this.state.description,
             material: this.state.material,
             cutList: this.state.cutList,
+            tools: this.state.tools,
             instructions: this.state.instructions,
             image: this.state.image
         }
         console.log("form data", project)
-        this.props.addProject(project)
+        this.props.editProject(project)
+            .then(() => this.props.history.push("/home"))
+    }
+
+    componentDidMount() {
+        API.get("projects", this.props.match.params.projectId)
+            .then(proj => {
+                this.setState({
+                    userId: +sessionStorage.getItem("user"),
+                    name: this.state.name,
+                    description: this.state.description,
+                    material: this.state.material,
+                    cutList: this.state.cutList,
+                    tools: this.state.tools,
+                    instructions: this.state.instructions,
+                    image: this.state.image,
+                    modal: false
+                })
+            })
     }
 
     closeModal = () => this.setState({ modal: false })
@@ -46,10 +69,10 @@ export default class ProjectForm extends Component {
         return (
 
             <div className="entire-modal">
-                <Button className="createBtn" onClick={this.openModal}><i className="fa fa-plus"></i> Create New Project</Button>
+                <Button className="createBtn" onClick={this.openModal}> Edit Project</Button>
                 <Modal show={this.state.modal}>
                     <Modal.Header>
-                        <Modal.Title>New Project</Modal.Title>
+                        <Modal.Title>Edit Project</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
@@ -96,7 +119,7 @@ export default class ProjectForm extends Component {
 
                     <Modal.Footer>
                         <Button onClick={this.closeModal} variant="secondary">Close</Button>
-                        <Button onClick={this.handleClick} variant="primary">Save</Button>
+                        <Button onClick={this.editProj} variant="primary">Save</Button>
                     </Modal.Footer>
 
                 </Modal>
@@ -105,3 +128,6 @@ export default class ProjectForm extends Component {
         )
     }
 }
+
+
+export default withRouter(EditProject)
