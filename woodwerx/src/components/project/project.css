@@ -1,7 +1,8 @@
 .projects {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .createBtn {
@@ -19,10 +20,6 @@
      margin: 10px
  }
 
-/* .my-proj {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly
-} */
+
 
  

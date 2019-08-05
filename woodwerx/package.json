@@ -8,6 +8,8 @@
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.10",
     "react-dom": "^16.8.6",
+    "react-inline-editing": "^1.0.10",
+    "react-mdl": "^1.11.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "reactstrap": "^8.0.1"

@@ -8,6 +8,7 @@ import Tool from './tool/Tool'
 import ProjectForm from './project/ProjectForm'
 import DetailedProject from './project/DetailedProject'
 import MyProjects from './project/MyProjects'
+import EditProject from './project/EditProject'
 
 export default class AppViews extends Component {
     state = {
@@ -46,6 +47,24 @@ export default class AppViews extends Component {
             .then(proj => this.setState({
                 projects: proj
             }))
+    }
+
+    deleteProject = id => {
+        return API.delete("projects", id)
+            .then(() => API.getAll("projects"))
+            .then(project => {
+                this.setState({ projects: project })
+            })
+    }
+
+    editProject = id => {
+        return API.put("projects", id)
+            .then(() => API.getAll("projects"))
+            .then(project => {
+                this.setState({
+                    projects: project
+                })
+            })
     }
 
 
@@ -104,7 +123,8 @@ export default class AppViews extends Component {
 
                     if (this.isAuthenticated()) {
                         // console.log(this.state.tools)
-                        return <DetailedProject proj={proj} />
+                        return <DetailedProject proj={proj}
+                            editProject={this.editProject} />
                     } else {
                         return <Redirect to="/" />
                     }
@@ -115,15 +135,29 @@ export default class AppViews extends Component {
                     // let myProj = this.state.projects.filter( proj => proj.userId === +sessionStorage.getItem("user"))
 
                     if (this.isAuthenticated()) {
-                        return <MyProjects 
-                        // myProj={myProj}
-                        getUserProjects={this.getUserProjects}
-                        projects={this.state.projects} 
+                        return <MyProjects
+                            // myProj={myProj}
+                            getUserProjects={this.getUserProjects}
+                            projects={this.state.projects}
+                            deleteProject={this.deleteProject}
                         />
                     } else {
                         return <Redirect to="/" />
                     }
                 }}
+                />
+
+                <Route
+                    path="/projects/:projectId(\d+)/edit"
+                    render={props => {
+                        return (
+                            <EditProject
+                                {...props}
+                                editProject={this.editProject}
+                                projects={this.state.projects}
+                            />
+                        );
+                    }}
                 />
 
             </React.Fragment>
