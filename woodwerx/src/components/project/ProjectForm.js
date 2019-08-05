@@ -45,7 +45,7 @@ export default class ProjectForm extends Component {
     render() {
         return (
 
-            <div className="entireModal">
+            <div className="entire-modal">
                 <Button className="createBtn" onClick={this.openModal}><i className="fa fa-plus"></i> Create New Project</Button>
                 <Modal show={this.state.modal}>
                     <Modal.Header>
@@ -63,7 +63,7 @@ export default class ProjectForm extends Component {
 
                             <Form.Group controlId="image">
                                 <Form.Label>Image URL</Form.Label>
-                                <Form.Control type="text" onChange={this.handleFieldChange}/>
+                                <Form.Control type="text" onChange={this.handleFieldChange} />
                             </Form.Group>
 
                             <Form.Group controlId="description">
@@ -82,14 +82,8 @@ export default class ProjectForm extends Component {
                             </Form.Group>
 
                             <Form.Group controlId="tools">
-                                <Form.Label>Tools (select all that apply) </Form.Label>
-                                <Form.Control as="select" multiple>
-                                    <option>Drill</option>
-                                    <option>Hand Saw</option>
-                                    <option>Miter Saw</option>
-                                    <option>Table Saw</option>
-                                    <option>Router</option>
-                                </Form.Control>
+                                <Form.Label>Tools</Form.Label>
+                                <Form.Control onChange={this.handleFieldChange} as="textarea" rows="3" />
                             </Form.Group>
 
                             <Form.Group controlId="instructions">
