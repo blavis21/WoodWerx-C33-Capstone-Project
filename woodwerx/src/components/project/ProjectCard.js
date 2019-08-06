@@ -19,6 +19,7 @@ export default class ProjectCard extends Component {
                 </Card.Body>
                 <Link to={`projects/${this.props.project.id}`}>
                     <Card.Footer>Details</Card.Footer>
+                    <Card.Footer>Add to</Card.Footer>
                 </Link>
             </Card>
         )

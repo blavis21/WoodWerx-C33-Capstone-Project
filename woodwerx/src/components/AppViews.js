@@ -9,6 +9,7 @@ import ProjectForm from './project/ProjectForm'
 import DetailedProject from './project/DetailedProject'
 import MyProjects from './project/MyProjects'
 import EditProject from './project/EditProject'
+import FavoriteProjects from './project/FavoriteProjects';
 
 export default class AppViews extends Component {
     state = {
@@ -28,6 +29,8 @@ export default class AppViews extends Component {
             .then(project => (newState.projects = project))
         API.getAll("tools")
             .then(tool => newState.tools = tool)
+        API.getAll("favoriteProjects?_expand=user&_expand=project")
+            .then(fav => newState.favorites = fav)
             .then(() => this.setState(newState))
     }
 
@@ -66,6 +69,12 @@ export default class AppViews extends Component {
                 })
             })
     }
+
+    // favoriteProjects(projects) {
+    //     console.log(projects)
+    //     return projects.filter(project => project.userId === +sessionStorage.getItem("user")
+    //     );
+    // }
 
 
     render() {
@@ -150,13 +159,30 @@ export default class AppViews extends Component {
                 <Route
                     path="/projects/:projectId(\d+)/edit"
                     render={props => {
-                        return (
-                            <EditProject
+                        if (this.isAuthenticated()) {
+                            return <EditProject
                                 {...props}
                                 editProject={this.editProject}
                                 projects={this.state.projects}
                             />
-                        );
+                        } else {
+                            return <Redirect to="/" />
+                        }
+                    }}
+                />
+
+                <Route
+                    path="/favorites"
+                    render={props => {
+                        if (this.isAuthenticated()) {
+                            return <FavoriteProjects
+                                {...props}
+                                favorites={this.state.favorites}
+                                // favoriteProjects={this.favoriteProjects}
+                            />
+                        } else {
+                            return <Redirect to="/" />
+                        }
                     }}
                 />
 
