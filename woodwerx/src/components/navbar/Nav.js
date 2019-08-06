@@ -73,7 +73,7 @@ export default class NavBar extends Component {
                 <NavLink href="/tools">Tools</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/tools">Favorites</NavLink>
+                <NavLink href="/favorites">Favorites</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/tools">Account</NavLink>

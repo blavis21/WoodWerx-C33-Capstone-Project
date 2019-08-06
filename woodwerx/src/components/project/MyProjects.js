@@ -15,7 +15,7 @@ export default class MyProjects extends Component {
     render() {
 
         return (
-            <div className="my-proj">
+            <div className="projects">
                 {this.props.projects.map(proj =>
                     // <div key={proj.id}>
                     <Card
