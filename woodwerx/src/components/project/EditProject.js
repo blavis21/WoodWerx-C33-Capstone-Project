@@ -41,6 +41,7 @@ class EditProject extends Component {
         console.log("form data", project)
         this.props.editProject(project)
             .then(() => this.props.history.push("/home"))
+            this.closeModal()
     }
 
     componentDidMount() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Col, Image } from 'react-bootstrap'
+import { Col, Image, Button } from 'react-bootstrap'
 import EditProject from './EditProject'
 // import EditableLabel from 'react-inline-editing'
 export default class DetailedProject extends Component {
@@ -10,6 +10,9 @@ export default class DetailedProject extends Component {
             <div >
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <EditProject {...this.props} />
+                </div>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    <Button>Add to Favorites</Button>
                 </div>
                 <div style={{ textAlign: 'center' }}>
 

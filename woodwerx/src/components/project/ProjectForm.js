@@ -35,6 +35,7 @@ export default class ProjectForm extends Component {
         }
         console.log("form data", project)
         this.props.addProject(project)
+        this.closeModal()
     }
 
     closeModal = () => this.setState({ modal: false })
