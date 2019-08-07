@@ -3,20 +3,6 @@ import { Card } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 export default class ProjectCard extends Component {
 
-    state = {
-        userId: +sessionStorage.getItem("user"),
-        projectId: ""
-    }
-
-    addFavorite = e => {
-        e.preventDefault()
-        const favorite = {
-            userId: this.state.userId,
-            projectId: this.props.project.id
-        }
-        console.log(favorite)
-        this.props.addFavorite(favorite)
-    }
 
     render() {
         return (
@@ -33,9 +19,6 @@ export default class ProjectCard extends Component {
                 </Card.Body>
                 <Link to={`projects/${this.props.project.id}`}>
                     <Card.Footer>Details</Card.Footer>
-                </Link>
-                <Link to={"/favorites"}>
-                    <Card.Footer onClick={this.addFavorite}>Add to Favorites</Card.Footer>
                 </Link>
             </Card>
         )

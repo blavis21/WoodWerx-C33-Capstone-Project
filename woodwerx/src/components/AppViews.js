@@ -70,7 +70,7 @@ export default class AppViews extends Component {
             })
     }
 
-    addFavorite = obj => {
+    addFavoriteProject = obj => {
         return API.post("favoriteProjects", obj)
         .then(() => API.getAll("favoriteProjects"))
         .then(fav => {
@@ -107,7 +107,6 @@ export default class AppViews extends Component {
                         return <Project {...props}
                             projects={this.state.projects}
                             addProject={this.addProject}
-                            addFavorite={this.addFavorite}
                         />
                     } else {
                         return <Redirect to="/" />
@@ -143,7 +142,9 @@ export default class AppViews extends Component {
                     if (this.isAuthenticated()) {
                         // console.log(this.state.tools)
                         return <DetailedProject proj={proj}
-                            editProject={this.editProject} />
+                            editProject={this.editProject} 
+                            addFavoriteProject={this.addFavoriteProject}
+                            />
                     } else {
                         return <Redirect to="/" />
                     }
