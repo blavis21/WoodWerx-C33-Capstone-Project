@@ -11,7 +11,7 @@
     "react-inline-editing": "^1.0.10",
     "react-mdl": "^1.11.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "reactstrap": "^8.0.1"
   },
   "scripts": {
